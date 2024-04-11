@@ -2,7 +2,7 @@
   <div class="calculadora">
     <div class="display">{{valorActual || '0'}}</div>
     <div v-on:click="limpiar" class="button">C</div>
-    <div v-on:click="n" class="button">+/-</div>
+    <div v-on:click="signo" class="button">+/-</div>
     <div v-on:click="n" class="button">%</div>
     <div v-on:click="n" class="button operator">÷</div>
     <div v-on:click="n" class="button">7</div>
@@ -37,9 +37,12 @@ export default {
     limpiar () {
       this.valorActual = '0'
     },
+    signo () {
+      this.valorActual = this.valorActual.charAt(0) === '-' ? this.valorActual.slice(1) : `-${this.valorActual}`
+    },
     n () {
       this.valorActual = true
-    } 
+    }
   }
 }
 </script>
