@@ -1,25 +1,25 @@
 <template>
   <div class="calculadora">
     <div class="display">{{valorActual || '0'}}</div>
-    <div class="button">C</div>
-    <div class="button">+/-</div>
-    <div class="button">%</div>
-    <div class="button operator">÷</div>
-    <div class="button">7</div>
-    <div class="button">8</div>
-    <div class="button">9</div>
-    <div class="button operator">x</div>
-    <div class="button">4</div>
-    <div class="button">5</div>
-    <div class="button">6</div>
-    <div class="button operator">-</div>
-    <div class="button">1</div>
-    <div class="button">2</div>
-    <div class="button">3</div>
-    <div class="button operator">+</div>
-    <div class="button zero">0</div>
-    <div class="button">.</div>
-    <div class="button">=</div>
+    <div v-on:click="limpiar" class="button">C</div>
+    <div v-on:click="n" class="button">+/-</div>
+    <div v-on:click="n" class="button">%</div>
+    <div v-on:click="n" class="button operator">÷</div>
+    <div v-on:click="n" class="button">7</div>
+    <div v-on:click="n" class="button">8</div>
+    <div v-on:click="n" class="button">9</div>
+    <div v-on:click="n" class="button operator">x</div>
+    <div v-on:click="n" class="button">4</div>
+    <div v-on:click="n" class="button">5</div>
+    <div v-on:click="n" class="button">6</div>
+    <div v-on:click="n" class="button operator">-</div>
+    <div v-on:click="n" class="button">1</div>
+    <div v-on:click="n" class="button">2</div>
+    <div v-on:click="n" class="button">3</div>
+    <div v-on:click="n" class="button operator">+</div>
+    <div v-on:click="n" class="button zero">0</div>
+    <div v-on:click="n" class="button">.</div>
+    <div v-on:click="n" class="button">=</div>
   </div>
 </template>
 
@@ -27,8 +27,19 @@
 export default {
   data () {
     return {
-      valorActual: '123'
+      valorActual: '123',
+      numeroAnterior: null,
+      operator: null,
+      operatorPulsado: false
     }
+  },
+  methods: {
+    limpiar () {
+      this.valorActual = '0'
+    },
+    n () {
+      this.valorActual = true
+    } 
   }
 }
 </script>
