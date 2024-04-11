@@ -18,7 +18,7 @@
     <div v-on:click="juntarNumeros('3')" class="button">3</div>
     <div v-on:click="n" class="button operator">+</div>
     <div v-on:click="juntarNumeros('0')" class="button zero">0</div>
-    <div v-on:click="n" class="button">.</div>
+    <div v-on:click="punto" class="button">.</div>
     <div v-on:click="n" class="button operator"> = </div>
   </div>
 </template>
@@ -28,6 +28,7 @@ export default {
   data () {
     return {
       valorActual: '123',
+      valorCorriente: '',
       numeroAnterior: null,
       operator: null,
       operatorPulsado: false
@@ -35,7 +36,7 @@ export default {
   },
   methods: {
     limpiar () {
-      this.valorActual = '0'
+      this.valorCorriente = '0'
     },
     signo () {
       this.valorActual = this.valorActual.charAt(0) === '-' ? this.valorActual.slice(1) : `-${this.valorActual}`
@@ -44,15 +45,20 @@ export default {
       this.valorActual = `${parseFloat(this.valorActual) / 100}`
     },
     juntarNumeros (numero) {
-      if (this.operatorClick) {
-        this.valorCorriente = numero;
-        this.operatorClick = false;
+      if (this.operatorPulsado) {
+        this.valorCorriente = '';
+        this.operatorPulsado = false;
       }
 
       this.valorCorriente = `${this.valorCorriente}${numero}`;
     },
+    punto () {
+      if (this.valorActual.indexOf('.') === -1) {
+        this.juntarNumeros('.')
+      }
+    },
     n () {
-      this.valorCorriente = true
+      this.valorCorriente = '123'
     }
   }
 }
