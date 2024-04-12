@@ -19,7 +19,7 @@
     <div v-on:click="n" class="button operator">+</div>
     <div v-on:click="juntarNumeros('0')" class="button zero">0</div>
     <div v-on:click="punto" class="button">.</div>
-    <div v-on:click="n" class="button operator"> = </div>
+    <div v-on:click="resultado" class="button operator"> = </div>
   </div>
 </template>
 
@@ -56,6 +56,17 @@ export default {
       if (this.valorActual.indexOf('.') === -1) {
         this.juntarNumeros('.')
       }
+    },
+    establecerValor () {
+      this.numeroAnterior = this.valorActual;
+      this.operadorCiclado = true;
+    },
+    resultado () {
+      this.valorActual = `${this.operador(
+        parseFloat(this.numeroAnterior),
+        parseFloat(this.valorActual)
+      )}`
+      this.numeroAnterior = null
     },
     n () {
       this.valorActual = '123'
