@@ -1,6 +1,6 @@
 <template>
   <div class="calculadora">
-    <div class="display">{{valorCorriente || '0'}}</div>
+    <div class="display">{{valorActual || '0'}}</div>
     <div v-on:click="limpiar" class="button">C</div>
     <div v-on:click="signo" class="button">+/-</div>
     <div v-on:click="porcentaje" class="button">%</div>
@@ -27,7 +27,7 @@
 export default {
   data () {
     return {
-      valorActual: '123',
+      valorActual: '',
       valorCorriente: '',
       numeroAnterior: null,
       operator: null,
@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     limpiar () {
-      this.valorCorriente = '0'
+      this.valorActual = ''
     },
     signo () {
       this.valorActual = this.valorActual.charAt(0) === '-' ? this.valorActual.slice(1) : `-${this.valorActual}`
@@ -46,11 +46,11 @@ export default {
     },
     juntarNumeros (numero) {
       if (this.operatorPulsado) {
-        this.valorCorriente = '';
+        this.valorActual = '';
         this.operatorPulsado = false;
       }
 
-      this.valorCorriente = `${this.valorCorriente}${numero}`;
+      this.valorActual = `${this.valorActual}${numero}`;
     },
     punto () {
       if (this.valorActual.indexOf('.') === -1) {
@@ -58,7 +58,7 @@ export default {
       }
     },
     n () {
-      this.valorCorriente = '123'
+      this.valorActual = '123'
     }
   }
 }
