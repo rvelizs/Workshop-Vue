@@ -4,7 +4,7 @@
     <div v-on:click="limpiar" class="button">C</div>
     <div v-on:click="signo" class="button">+/-</div>
     <div v-on:click="porcentaje" class="button">%</div>
-    <div v-on:click="n" class="button operator">÷</div>
+    <div v-on:click="dividir" class="button operator">÷</div>
     <div v-on:click="juntarNumeros('7')" class="button">7</div>
     <div v-on:click="juntarNumeros('8')" class="button">8</div>
     <div v-on:click="juntarNumeros('9')" class="button">9</div>
@@ -29,7 +29,6 @@ export default {
     return {
       valorActual: '',
       valorCorriente: '',
-      numeroAnterior: null,
       operator: null,
       operatorPulsado: false
     }
@@ -37,6 +36,9 @@ export default {
   methods: {
     limpiar () {
       this.valorActual = ''
+      this.numeroAnterior = null
+      this.operator = null
+      this.operatorPulsado = false
     },
     signo () {
       this.valorActual = this.valorActual.charAt(0) === '-' ? this.valorActual.slice(1) : `-${this.valorActual}`
@@ -59,17 +61,21 @@ export default {
     },
     establecerValor () {
       this.numeroAnterior = this.valorActual;
-      this.operadorCiclado = true;
+      this.operatorPulsado = true;
     },
     resultado () {
-      this.valorActual = `${this.operador(
+      this.valorActual = `${this.operator(
         parseFloat(this.numeroAnterior),
         parseFloat(this.valorActual)
       )}`
       this.numeroAnterior = null
     },
+    dividir () {
+      this.establecerValor()
+      this.operator = (a, b) => a / b
+    },
     n () {
-      this.valorActual = '123'
+      this.valorActual = ''
     }
   }
 }
